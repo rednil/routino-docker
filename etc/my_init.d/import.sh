@@ -13,17 +13,24 @@ if [ "$regions" != "$ROUTINO_REGIONS" ]; then
   #break on errors
   set -e
 
+  pbfs=""
+  polys=""
+
   # Download the files
   for region in $ROUTINO_REGIONS; do
-     wget -N http://download.geofabrik.de/$region-latest.osm.bz2
-     wget -N http://download.geofabrik.de/$region.poly
+    pbf=${region}-latest.osm.pbf
+    poly=${region}.poly
+    wget -N --force-directories --no-host-directories http://download.geofabrik.de/${pbf}
+    wget -N --force-directories --no-host-directories http://download.geofabrik.de/${poly}
+    pbfs="${pbfs} ${pbf}"
+    polys="${polys} ${poly}"
   done
 
   # Prepare data for ROUTINO
-  planetsplitter --errorlog *.osm.bz2
+  planetsplitter --errorlog ${pbfs}
 
   # Calculate the bounding box for initial zoom in the web interface
-  nodejs /poly2bb.js *.poly > bb.env
+  nodejs /poly2bb.js ${polys} > bb.env
 
   # remember the current regions to prevent import at next startup
   echo $ROUTINO_REGIONS > regions.txt

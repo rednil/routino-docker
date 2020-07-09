@@ -35,7 +35,6 @@ WORKDIR /var/www/html/routino/www/leaflet
 RUN ./install.sh
 
 # Configure APACHE
-#RUN sed -i '2 i <Directory /var/www/html/routino/>\nAllowOverride Options=MultiViews,ExecCGI FileInfo Limit\n</Directory>' /etc/apache2/sites-enabled/000-default.conf
 RUN cd /etc/apache2/mods-enabled && ln -s ../mods-available/cgi.load
 
 COPY . /
