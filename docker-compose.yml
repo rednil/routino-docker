@@ -1,6 +1,7 @@
 main:
   build: .
   environment:
+    - ROUTINO_TILE_URL=http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
     - ROUTINO_REGIONS=europe/germany/bremen
   ports:
     - 8042:80

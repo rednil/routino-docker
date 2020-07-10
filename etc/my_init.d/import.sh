@@ -42,5 +42,9 @@ set -a
 # read the bounding box calculated before
 source bb.env
 
+# if a tile url is handed in via docker-compose, variables will be replaced by docker-compose
+# in order to prevent this, we use simple curly braces ({x}), which are transformed to proper variables here
+ROUTINO_TILE_URL_FIXED=${ROUTINO_TILE_URL//\{/$\{}
+
 # configure mapprops with env variables
 envsubst < /mapprops.js > /var/www/html/routino/www/routino/mapprops.js

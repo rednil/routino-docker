@@ -10,3 +10,5 @@ As a little gimmick, the respective shape files are parsed in order to initially
 The docker image can be configured using [environment variables](https://docs.docker.com/engine/reference/run/#env-environment-variables). All featured options can be seen in [etc/container_environment](https://github.com/rednil/routino-docker/tree/master/etc/container_environment). Most important is 'ROUTINO_REGIONS'. Its syntax corresponds to the file structure at [GeoFabriks download server](https://download.geofabrik.de), e.g.:
 
 `docker run -e "ROUTINO_REGIONS=europe/germany/bremen europe/germany/berlin" -p 8042:80 rednil/routino-docker`
+
+In order to prevent glitches with environment variable substitution in docker-compose, the [tile server url](https://github.com/rednil/routino-docker/blob/master/etc/container_environment/ROUTINO_TILE_URL) syntax uses simple curly braces for variables ({x}). This is transformed to ROUTINOs syntax (${x}) at runtime.

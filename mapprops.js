@@ -33,7 +33,7 @@ var mapprops={ // contains all properties for the map to be displayed.
            {
             label: "OpenStreetMap",
             tiles: {
-                    url: "${ROUTINO_TILE_URL}",
+                    url: "${ROUTINO_TILE_URL_FIXED}",
                     subdomains: ["a","b","c"]
                    },
             attribution: {
